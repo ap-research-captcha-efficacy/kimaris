@@ -4,4 +4,4 @@ endpoint = "http://localhost:5000"
 if len(sys.argv) > 1:
     endpoint = sys.argv[1]
 k = kimaris(endpoint)
-k.attack_captcha("example")
+k.attack_captcha("test-target")

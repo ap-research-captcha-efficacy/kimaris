@@ -6,7 +6,7 @@ class captcha_context():
         self.token = token
         self.appx_gen_time = appx_gen_time
     def is_approximately_expired(self):
-        return ((datetime.now().timestamp() - self.appx_gen_time) > 119)
+        return ((datetime.now().timestamp() - self.appx_gen_time) > 59)
 
 class kimaris():
     def __init__(self, target):
