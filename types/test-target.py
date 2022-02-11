@@ -7,5 +7,4 @@ def kill(input):
     while True:
         guess = token_hex(3)
         if sha256(guess.encode("ascii")).hexdigest() == key:
-            print("found >> ", guess)
             return (guess, input)

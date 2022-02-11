@@ -25,7 +25,7 @@ class kimaris():
             ans = getattr(self.suite[name], "kill")(self.get_captcha_response(name))
             print(ans[0])
             if self.test_solution(ans[0], ans[1].token):
-                print(f"successfully killed {name}")
+                print(f"successfully killed {name} with {ans[0]}")
             else:
                 print(f"/solution check failed for {name}, likely a solving error")
         except Exception as e:
