@@ -5,6 +5,6 @@ from threading import Thread
 def kill(input):
     key = input.challenge.split(",")[1]
     while True:
-        guess = token_hex(3)
+        guess = token_hex(2)
         if sha256(guess.encode("ascii")).hexdigest() == key:
             return (guess, input)

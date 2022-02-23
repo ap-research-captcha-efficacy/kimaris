@@ -23,7 +23,7 @@ class kimaris():
             return
         try:
             ans = getattr(self.suite[name], "kill")(self.get_captcha_response(name))
-            print(ans[0])
+            # print(ans[0])
             if self.test_solution(ans[0], ans[1].token):
                 print(f"successfully killed {name} with {ans[0]}")
             else:
