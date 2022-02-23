@@ -26,11 +26,13 @@ class kimaris():
             # print(ans[0])
             if self.test_solution(ans[0], ans[1].token):
                 print(f"successfully killed {name} with {ans[0]}")
+                return True
             else:
                 print(f"/solution check failed for {name}, likely a solving error")
         except Exception as e:
             print(e)
             print("error calling killer")
+        return False
     def test_solution(self, sol, token):
         return (self.__wrap_critical_get(self.endpoint+"/solution", params={"proposal": sol, "token": token}).status_code == 200)
     def get_captcha_response(self, name):

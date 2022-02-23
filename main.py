@@ -12,8 +12,10 @@ for target in k.targeting_points:
     temp_score = 0
     for trial in range(trials):
         start = default_timer()
-        k.attack_captcha(target)
+        good = k.attack_captcha(target)
         time_taken = default_timer() - start
+        if not good:
+            time_taken = -1 * time_taken
         temp_score += time_taken
     scores[target] = temp_score/3
     print(f"finished {target} with {trials} trials and average score {scores[target]}")
