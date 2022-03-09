@@ -18,11 +18,14 @@ class kimaris():
         if not(name in self.targeting_points):
             print("target not on endpoint\nbailing...")
             return
+        oname = name
+        name = name.split("?modifiers=")[0]
         if not(name in self.suite):
             print("no module found for target")
             return
         try:
-            ans = getattr(self.suite[name], "kill")(self.get_captcha_response(name))
+            print(oname)
+            ans = getattr(self.suite[name], "kill")(self.get_captcha_response(oname))
             # print(ans[0])
             if self.test_solution(ans[0], ans[1].token):
                 print(f"successfully killed {name} with {ans[0]}")
@@ -35,8 +38,8 @@ class kimaris():
         return False
     def test_solution(self, sol, token):
         return (self.__wrap_critical_get(self.endpoint+"/solution", params={"proposal": sol, "token": token}).status_code == 200)
-    def get_captcha_response(self, name):
-        if not(name in self.targeting_points):
+    def get_captcha_response(self, name, mods = []):
+        if not(name.split("?modifiers=")[0] in self.targeting_points):
             print("target not on endpoint\nbailing...")
             return
         res = json.loads(self.__wrap_critical_get(self.endpoint+"/captcha/"+name).text)
