@@ -19,5 +19,6 @@ for target in k.targeting_points:
             fails += 1
         temp_score += time_taken
     scores[target] = (temp_score/trials, (trials-fails)/trials)
-    print(f"finished {target} with {trials} trials and average score {scores[target]}")
-print(scores)
+    print(f"finished {target} with {trials} trials and average score {scores[target]}\n")
+for k in scores.keys():
+    print(k,":", scores[k])
