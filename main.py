@@ -5,7 +5,10 @@ endpoint = "http://localhost:5000"
 if len(sys.argv) > 1:
     endpoint = sys.argv[1]
 
-trials = 50
+trials = 300
+options = []
+if len(sys.argv) > 2:
+    options = sys.argv[2:]
 scores = {}
 k = kimaris(endpoint)
 for target in k.targeting_points:
@@ -13,7 +16,7 @@ for target in k.targeting_points:
     fails = 0
     for trial in range(trials):
         start = default_timer()
-        good = k.attack_captcha(target)
+        good = k.attack_captcha(target, opts = options)
         time_taken = default_timer() - start
         if not good:
             fails += 1
@@ -22,3 +25,4 @@ for target in k.targeting_points:
     print(f"finished {target} with {trials} trials and average score {scores[target]}\n")
 for k in scores.keys():
     print(k,":", scores[k])
+print(f"used options {options}")

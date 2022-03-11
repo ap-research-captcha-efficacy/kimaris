@@ -2,7 +2,7 @@ from hashlib import sha256
 from secrets import token_hex
 from threading import Thread
 
-def kill(input):
+def kill(input, options = []):
     key = input.challenge.split(",")[1]
     while True:
         guess = token_hex(2)

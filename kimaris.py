@@ -14,7 +14,7 @@ class kimaris():
         self.targeting_points = json.loads(self.__wrap_critical_get(self.endpoint+"/captchas").text)["captchas"]
         self.suite = {}
         self.__load_types()
-    def attack_captcha(self, name):
+    def attack_captcha(self, name, opts = []):
         if not(name in self.targeting_points):
             print("target not on endpoint\nbailing...")
             return
@@ -24,14 +24,12 @@ class kimaris():
             print("no module found for target")
             return
         try:
-            print(oname)
-            ans = getattr(self.suite[name], "kill")(self.get_captcha_response(oname))
-            # print(ans[0])
+            ans = getattr(self.suite[name], "kill")(self.get_captcha_response(oname), options = opts)
             if self.test_solution(ans[0], ans[1].token):
                 print(f"successfully killed {name} with {ans[0]}")
                 return True
             else:
-                print(f"/solution check failed for {name}, likely a solving error")
+                print(f"/solution check failed for {name}, likely a solving error.")
         except Exception as e:
             print(e)
             print("error calling killer")
