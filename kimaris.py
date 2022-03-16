@@ -1,5 +1,6 @@
 import requests, json, sys, os
 from datetime import datetime
+import traceback
 class captcha_context():
     def __init__(self, challenge, token, appx_gen_time):
         self.challenge = challenge
@@ -31,7 +32,7 @@ class kimaris():
             else:
                 print(f"/solution check failed for {name}, likely a solving error.")
         except Exception as e:
-            print(e)
+            print(traceback.print_exc())
             print("error calling killer")
         return False
     def test_solution(self, sol, token):

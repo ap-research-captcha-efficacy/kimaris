@@ -27,7 +27,7 @@ vocab = {
 class amadeus():
     def __init__(self, path, image_size, batch_size, load_from_file=False, epochs=15):
         if load_from_file and not self.check_for_save():
-            print("save does not yet existing, defaulting to normal routine")
+            print("save does not yet exist, defaulting to normal routine")
             load_from_file = False
         self.image_size = image_size
         self.batch_size = batch_size
@@ -84,23 +84,23 @@ class amadeus():
     
     def load_model_from_disk(self):
         try:
-            return keras.models.load_model("./saves/final")
+            return keras.models.load_model("./types/external/amadeus/saves/final")
         except Exception as e:
             print(e, "error loading model from disk, try generating it the normal way")
 
     def check_for_save(self):
-        return path.isdir("./saves/final")
+        return path.isdir("./types/external/amadeus/saves/final")
 
     def fit(self, epochs):
         if not self.dataset_loaded or not self.model:
             print("tried to fit before loading dataset inclusive(or) loading model")
             return
         callbacks = [
-            keras.callbacks.ModelCheckpoint("./saves/{epoch}"),
+            keras.callbacks.ModelCheckpoint("./types/external/amadeus/saves/{epoch}"),
         ]
         self.model.compile(optimizer="adam", loss="sparse_categorical_crossentropy")
         self.model.fit(self.dataset_training, epochs=epochs, callbacks=callbacks, validation_data=self.dataset_validation)
-        self.model.save("./saves/final")
+        self.model.save("./types/external/amadeus/saves/final")
         self.fitted = True
 
     def test_accuracy_on_image_pil(self, img):
